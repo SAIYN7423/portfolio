@@ -1,17 +1,20 @@
-import sqlite3
 from flask import Flask, render_template, request
+import sqlite3
 
 app = Flask(__name__)
 
+# Database connection function
 def get_db_connection():
-    conn = sqlite3.connect('contact_details sqllite.db')
+    conn = sqlite3.connect('data.db')  # clean filename
     conn.row_factory = sqlite3.Row
     return conn
 
+# Home route (main portfolio page)
 @app.route('/')
 def home():
     return render_template('portfolio.html')
 
+# Contact form route
 @app.route('/form', methods=['GET', 'POST'])
 def form():
     if request.method == 'POST':
@@ -32,3 +35,6 @@ def form():
         return 'Thanks for contacting me!'
 
     return render_template('form.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
