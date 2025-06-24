@@ -580,25 +580,20 @@ Collaborated with the analytics team to streamline reporting and improve decisio
         
 
     </main>
+        </main>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script>
-  window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-  };
-
-  var typed = new Typed('#element', {
-    strings: ['Web Developer &amp;', 'A Data Analyst '],
-    typeSpeed: 50,
-  });
-</script>
 
     <script>
-    var typed = new Typed('#element', {
-      strings: ['Web Developer &amp;',  'A Data Analyst '],
-      typeSpeed: 50,
-    });
-  </script>
+      window.addEventListener('load', function () {
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 10);
+      });
 
+      var typed = new Typed('#element', {
+        strings: ['Web Developer &amp;', 'A Data Analyst '],
+        typeSpeed: 50,
+      });
+    </script>
 </body>
-
 </html>
