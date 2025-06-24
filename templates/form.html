@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+    <style>
+        body {
+            background-color: rgb(0, 0, 33);
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            color: white;
+        }
+
+        .form_container {
+            text-align: center;
+            margin: 40px auto;
+            padding: 23px 11px;
+            max-width: 523px;
+            line-height: 1.6;
+            border-radius: 32px;
+            box-shadow: 0 1px 17px rgb(120, 120, 214);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            background-color: white;
+            color: black;
+            border: 1px solid #ccc;
+            width: 300px;
+            height: 35px;
+            margin-top: 5px;
+        }
+
+        textarea {
+            height: 100px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #121247;
+            color: white;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(114, 183, 255, 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #8b5ff1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="form_container">
+        <h1>Contact Form</h1><br>
+        <form action="/submit" method="post">
+            Full Name:<br>
+            <input type="text" name="name" required><br><br>
+            Email ID:<br>
+            <input type="email" name="email" required><br><br>
+            Mobile:<br>
+            <input type="number" name="phone" required><br><br>
+            Message:<br>
+            <textarea name="message" required></textarea><br><br>
+
+            <button type="submit">Submit Info</button>
+        </form>
+    </div>
+</body>
+</html>
