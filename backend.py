@@ -1,41 +1,34 @@
+import sqlite3
 from flask import Flask, render_template, request
-import mysql.connector
 
 app = Flask(__name__)
 
-# Database connection
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="7423",  # change if needed
-    database="contected_details"
-)
-cursor = db.cursor()
+def get_db_connection():
+    conn = sqlite3.connect('contact_details sqllite.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
-# Home (Portfolio)
-@app.route("/")
+@app.route('/')
 def home():
-    return render_template("portfolio.html")  # portfolio page
+    return render_template('portfolio.html')
 
-# Contact Form Page
-@app.route("/form")
+@app.route('/form', methods=['GET', 'POST'])
 def form():
-    return render_template("form.html")  # form page
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        message = request.form['message']
 
-# Form Submission Handler
-@app.route("/submit", methods=["POST"])
-def submit():
-    name = request.form["name"]
-    phone = request.form["phone"]
-    email = request.form["email"]
-    message = request.form["message"]
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            'INSERT INTO contected_details (name, email, phone, message) VALUES (?, ?, ?, ?)',
+            (name, email, phone, message)
+        )
+        conn.commit()
+        conn.close()
 
-    query = "INSERT INTO details (name, phone, email, message) VALUES (%s, %s, %s, %s)"
-    values = (name, phone, email, message)
-    cursor.execute(query, values)
-    db.commit()
+        return 'Thanks for contacting me!'
 
-    return "<h2 style='text-align:center; color:green;'>Form submitted successfully!</h2>"
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    return render_template('form.html')
